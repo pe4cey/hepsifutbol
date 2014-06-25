@@ -1,11 +1,19 @@
+
 var express = require('express')
 var app = express();
+
 
 app.set('port', (process.env.PORT || 5000))
 app.use(express.static(__dirname + '/public'))
 
 app.get('/', function(request, response) {
-  response.send('Hello World!')
+  var request = require('request');
+request('http://www.google.com', function (error, response, body) {
+  if (!error && response.statusCode == 200) {
+    console.log(body) // Print the google web page.
+  }
+})
+  response.send("body")
 })
 
 app.listen(app.get('port'), function() {
